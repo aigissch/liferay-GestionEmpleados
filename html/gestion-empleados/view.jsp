@@ -1,17 +1,10 @@
-
-<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
-
 <%@include file="/html/init.jsp" %>
-
 Esta es la lista de empleados.
-
-<%
-	String redirect = PortalUtil.getCurrentURL(renderRequest);
-%>
+<% String redirect = PortalUtil.getCurrentURL(renderRequest); %>
 
 <aui:button-row>
 	<portlet:renderURL var="addEmpleadoURL">
-		<portlet:param name="mvcPath" value="/html/listaempleados/edit_empleado.jsp" />
+		<portlet:param name="mvcPath" value="/html/gestion-empleados/edit_empleados.jsp" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 	</portlet:renderURL>
 
@@ -23,42 +16,40 @@ Esta es la lista de empleados.
 		results="<%= EmpleadoLocalServiceUtil.getEmpleadosByGroupId(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd()) %>"
 		total="<%= EmpleadoLocalServiceUtil.getEmpleadosCountByGroupId(scopeGroupId) %>"
 	/>
-
+	
 	<liferay-ui:search-container-row
-		className="com.liferay.sample.model.Empleado"
+		className="com.telefonica.model.Empleado"
 		keyProperty="idEmpleado"
 		modelVar="empleado" escapedModel="<%= true %>"
 	>
+<%-- 			<liferay-ui:search-container-column-text --%>
+<%-- 			name="Foto" --%>
+<%-- 			value="<%= empleado.getUrlFoto() %>" /> --%>
+		<liferay-ui:search-container-column-text>
+			<img src="<%= empleado.getUrlFoto() %>" class="avatar">
+		</liferay-ui:search-container-column-text>
 		<liferay-ui:search-container-column-text
 			name="nombre"
-			value="<%= empleado.getNombre() %>"
-		/>
+			value="<%= empleado.getNombre() %>" />
 
 		<liferay-ui:search-container-column-text
 			name="telefono"
-			property="telefono"
-		/>
-
+			value="<%= empleado.getTelefono() %>" />
+		
 		<%
 			String departamentoName = "";
-			try {
-				departamentoName = DepartamentoLocalServiceUtil.getDepartamento
+			try { departamentoName = DepartamentoLocalServiceUtil.getDepartamento
 						(empleado.getIdDepartamento()).getNombre();
-			} catch (Exception e) {
-			}
+			} catch (Exception e) { e.printStackTrace(); }
 		%>
 
 		<liferay-ui:search-container-column-text
 			name="departamento"
-			value="<%= departamentoName %>"
-		/>
-
+			value="<%= departamentoName %>" />
 
 		<liferay-ui:search-container-column-jsp
 			align="right"
-			path="/html/listaempleados/empleado_actions.jsp"
-		/>
+			path="/html/gestion-empleados/actions_empleados.jsp" />
 	</liferay-ui:search-container-row>
-
 	<liferay-ui:search-iterator />
 </liferay-ui:search-container>

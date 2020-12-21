@@ -12,16 +12,16 @@
  * details.
  */
 
-package com.liferay.sample.service.impl;
+package com.telefonica.service.impl;
 
 import java.util.List;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.sample.model.Empleado;
-import com.liferay.sample.service.EmpleadoLocalServiceUtil;
-import com.liferay.sample.service.base.EmpleadoLocalServiceBaseImpl;
+import com.telefonica.model.Empleado;
+import com.telefonica.service.EmpleadoLocalServiceUtil;
+import com.telefonica.service.base.EmpleadoLocalServiceBaseImpl;
 
 /**
  * The implementation of the empleado local service.
@@ -39,18 +39,15 @@ import com.liferay.sample.service.base.EmpleadoLocalServiceBaseImpl;
  */
 public class EmpleadoLocalServiceImpl extends EmpleadoLocalServiceBaseImpl {
 
-	public Empleado addEmpleado(String nombre, String telefono, int idDepartamento,
-			ServiceContext serviceContext)
+	public Empleado addEmpleado(String nombre, String telefono, int idDepartamento, String urlFoto, ServiceContext serviceContext)
 	    throws PortalException, SystemException {
 
 		int idEmpleado = (int) counterLocalService.increment(Empleado.class.getName());
-
 	    Empleado empleado = empleadoPersistence.create(idEmpleado);
-
 	    empleado.setNombre(nombre);
 	    empleado.setTelefono(telefono);
 	    empleado.setIdDepartamento(idDepartamento);
- 
+	    empleado.setUrlFoto(urlFoto);
 	    super.addEmpleado(empleado);
 	    return empleado;
 	}
@@ -62,6 +59,7 @@ public class EmpleadoLocalServiceImpl extends EmpleadoLocalServiceBaseImpl {
 	public Empleado deleteEmpleado(int idEmpleado)
 	    throws PortalException, SystemException {
 	    Empleado empleado = empleadoPersistence.findByPrimaryKey(idEmpleado);
+	    
 	    return deleteEmpleado(empleado);
 	}
 
@@ -71,40 +69,45 @@ public class EmpleadoLocalServiceImpl extends EmpleadoLocalServiceBaseImpl {
 	    return empleadoPersistence.findByPrimaryKey(idEmpleado);
 	}
 	
-
 	public List<Empleado> getEmpleadosByGroupId(long groupId) throws SystemException {
-
 	    //return empleadoPersistence.findByGroupId(groupId);
 		return empleadoPersistence.findAll();
 	}
 
 	public List<Empleado> getEmpleadosByGroupId(long groupId, int start, int end)
 	    throws SystemException {
-
 	    //return empleadoPersistence.findByGroupId(groupId, start, end);
 		return empleadoPersistence.findAll();
 	}
 
 	public int getEmpleadosCountByGroupId(long groupId) throws SystemException {
-
 	    //return empleadoPersistence.countByGroupId(groupId);
 		return empleadoPersistence.countAll();
 	}
 
-	public Empleado updateEmpleado(int idEmpleado, String nombre, String telefono, 
-			int idDepartamento, ServiceContext serviceContext)
+	public Empleado updateEmpleado(
+			int idEmpleado, String nombre, String telefono, int idDepartamento, String urlFoto, ServiceContext serviceContext)
 	    throws PortalException, SystemException {
 
 	    Empleado empleado = EmpleadoLocalServiceUtil.fetchEmpleado(idEmpleado);
-
 	    empleado.setNombre(nombre);
 	    empleado.setTelefono(telefono);
 	    empleado.setIdDepartamento(idDepartamento);
+	    empleado.setUrlFoto(urlFoto);
 
 	    super.updateEmpleado(empleado);
 
 	    return empleado;
-	}
+	} 
+	
+	public Empleado updateFoto(int idEmpleado, String urlFoto, ServiceContext serviceContext)
+		throws PortalException, SystemException {
+		
+		Empleado empleado = EmpleadoLocalServiceUtil.fetchEmpleado(idEmpleado);
+	    empleado.setUrlFoto(urlFoto);
 
- 
+	    super.updateEmpleado(empleado);
+	    
+	    return empleado;
+	}
 }

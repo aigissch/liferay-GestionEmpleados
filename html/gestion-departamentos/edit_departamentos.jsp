@@ -1,11 +1,9 @@
 <%@include file="/html/init.jsp" %>
-
 <%
 	Departamento departamento = null;
 	int IdDepartamento = ParamUtil.getInteger(request, "IdDepartamento");
 	if (IdDepartamento > 0) {
-		departamento = DepartamentoLocalServiceUtil.getDepartamento(IdDepartamento);
-	}
+		departamento = DepartamentoLocalServiceUtil.getDepartamento(IdDepartamento); }
 	String redirect = ParamUtil.getString(request, "redirect");
 %>
 
@@ -21,17 +19,13 @@
 <aui:form action="<%= editDepartamentoURL %>" method="POST" name="fm">
 	<aui:fieldset>
 		<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
-
 		<aui:input name="IdDepartamento" type="hidden" value='<%= departamento == null ? "" : departamento.getIdDepartamento() %>'/>
-
 		<aui:input name="nombre" />
-
 		<aui:input name="descripcion" />
 	</aui:fieldset>
 
 	<aui:button-row>
 		<aui:button type="submit" />
-
 		<aui:button onClick="<%= viewDepartamentoURL %>"  type="cancel" />
 	</aui:button-row>
 </aui:form>
