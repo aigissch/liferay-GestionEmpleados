@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.telefonica.model.Departamento" />
+	<import class="com.telefonica.model.Empleado" />
+	<class name="com.telefonica.model.impl.DepartamentoImpl" table="ge_Departamento">
+		<cache usage="read-write" />
+		<id name="idDepartamento" type="int">
+			<generator class="assigned" />
+		</id>
+		<property name="nombre" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="descripcion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.telefonica.model.impl.EmpleadoImpl" table="ge_Empleado">
+		<cache usage="read-write" />
+		<id name="idEmpleado" type="int">
+			<generator class="assigned" />
+		</id>
+		<property name="nombre" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="telefono" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="idDepartamento" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="urlFoto" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

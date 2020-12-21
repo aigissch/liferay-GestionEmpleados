@@ -1,0 +1,9 @@
+@import "bootstrap.css";
+
+.avatar {
+	width:150px;
+}
+
+.lfr-menu-list ul li .taglib-icon {
+	font-size:10px;
+}

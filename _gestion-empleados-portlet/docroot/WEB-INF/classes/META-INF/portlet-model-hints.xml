@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.telefonica.model.Departamento">
+		<field name="idDepartamento" type="int" />
+		<field name="nombre" type="String" />
+		<field name="descripcion" type="String" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+	</model>
+	<model name="com.telefonica.model.Empleado">
+		<field name="idEmpleado" type="int" />
+		<field name="nombre" type="String" />
+		<field name="telefono" type="String" />
+		<field name="idDepartamento" type="int" />
+		<field name="urlFoto" type="String">
+			<hint name="max-length">500</hint>
+		</field>
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+	</model>
+</model-hints>

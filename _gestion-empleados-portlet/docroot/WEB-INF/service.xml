@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
+<service-builder package-path="com.telefonica">
+	<author>anadlca</author>
+	<namespace>ge</namespace>
+    <entity name="Empleado" local-service="true" remote-service="true">
+        <column name="idEmpleado" type="int" primary="true"></column>
+        <column name="nombre" type="String"></column>
+        <column name="telefono" type="String"></column>
+        <column name="idDepartamento" type="int"></column>
+        <column name="urlFoto" type="String"></column>
+        <column name="companyId" type="long"></column>
+        <column name="groupId" type="long"></column>
+        <finder name="groupId" return-type="Collection">
+            <finder-column name="groupId"></finder-column>
+        </finder>
+    </entity>
+    <entity name="Departamento" local-service="true" remote-service="true">
+        <column name="idDepartamento" type="int" primary="true"></column>
+        <column name="nombre" type="String"></column>
+        <column name="descripcion" type="String"></column>
+        <column name="companyId" type="long"></column>
+        <column name="groupId" type="long"></column>
+        <finder name="groupId" return-type="Collection">
+            <finder-column name="groupId"></finder-column>
+        </finder>
+    </entity>
+
+	
+</service-builder>

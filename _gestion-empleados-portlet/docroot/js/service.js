@@ -1,0 +1,1 @@
+Liferay.Service.register("Liferay.Service.ge", "com.telefonica.service", "gestion-empleados-portlet");
